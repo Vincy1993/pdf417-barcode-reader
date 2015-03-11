@@ -7,6 +7,10 @@ Screenshots
 -----------
 ![image](http://www.codepool.biz/wp-content/uploads/2015/03/pdf417_read_barcode.png)
 
-[1]:http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx
+Blogs
+-------
+[How to Build a Web App to Read PDF417 Barcode with DWT][2]
 
+[1]:http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx
+[2]:http://www.codepool.biz/barcode/how-to-build-a-web-app-to-read-pdf417-barcode-with-dwt.html
 
