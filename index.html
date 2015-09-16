@@ -12,6 +12,8 @@
 	</style>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"> </script>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"> </script>
+    <script type="text/javascript" src="Resources/addon/dynamsoft.webtwain.addon.barcode.js"> </script>
+
 </head>
 
 <body>
@@ -72,9 +74,9 @@
         function GetField(keyword) {
 
             var k = text.search(keyword);
-            var n = text.indexOf(":", k);
-            var m = text.indexOf("\n", n);
-            var subtext = text.substring(n+1, m);
+            
+            var m = text.indexOf("\n", k);
+            var subtext = text.substring(k+3, m);
             return subtext;
         }
 
@@ -99,15 +101,15 @@
 
                     alert(text);
                     if (text.search("Given Name") == -1)
-                        document.getElementById("FirstName").value = GetField("First Name");
+                        document.getElementById("FirstName").value = GetField("DCT");
                     else
-                        document.getElementById("FirstName").value = GetField("Given Name");
-                    document.getElementById("LastName").value = GetField("Last Name");
-                    document.getElementById("LicenseNumber").value = GetField("License Number");
-                    document.getElementById("State").value = GetField("State");
-                    document.getElementById("City").value = GetField("City");
-                    document.getElementById("Address").value = GetField("Address");
-                    document.getElementById("Zip").value = GetField("Zip");
+                        document.getElementById("FirstName").value = GetField("DCT");
+                    document.getElementById("LastName").value = GetField("DCS");
+                    document.getElementById("LicenseNumber").value = GetField("DAQ");
+                    document.getElementById("State").value = GetField("DAJ");
+                    document.getElementById("City").value = GetField("DAI");
+                    document.getElementById("Address").value = GetField("DAG");
+                    document.getElementById("Zip").value = GetField("DAK");
 
                 }
             }
@@ -117,18 +119,22 @@
         function ReadBarcode() {
             
             if (DWObject) {
-                if (DWObject.Addon.Barcode.GetLocalVersion() == "9, 6, 2, 303") {
+			  
+                
                     if (DWObject.HowManyImagesInBuffer == 0) {
                         alert("Please scan or load an image first.");
                         return;
                     }
+					else {
+					var barcodeFilePath = location.href.substring(0, location.href.lastIndexOf("/") + 1) + "Resources/addon/Barcode.zip";
+				DWObject.Addon.Barcode.Download(barcodeFilePath, OnSuccess, OnFailure);
+					
+					}
 
                     result = DWObject.Addon.Barcode.Read(
                             DWObject.CurrentImageIndexInBuffer, 1024, GetBarcodeInfo, OnFailure);
-                }
-                else {
-                    DWObject.Addon.Barcode.Download("\\Resources\\Barcode.zip",ReadBarcode,OnFailure);
-                }
+                
+               
             }
         }
     </script>
